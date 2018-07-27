@@ -15,6 +15,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-crud-mocks": [
+        "dist/ngx-crud-mocks"
+      ],
+      "ngx-crud-mocks/*": [
+        "dist/ngx-crud-mocks/*"
+      ]
+    }
   }
 }

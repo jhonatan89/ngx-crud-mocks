@@ -121,6 +121,46 @@
           }
         }
       }
+    },
+    "ngx-crud-mocks": {
+      "root": "projects/ngx-crud-mocks",
+      "sourceRoot": "projects/ngx-crud-mocks/src",
+      "projectType": "library",
+      "prefix": "ngm",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-crud-mocks/tsconfig.lib.json",
+            "project": "projects/ngx-crud-mocks/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-crud-mocks/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-crud-mocks/src/test.ts",
+            "tsConfig": "projects/ngx-crud-mocks/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-crud-mocks/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-crud-mocks/tsconfig.lib.json",
+              "projects/ngx-crud-mocks/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-mocks"
