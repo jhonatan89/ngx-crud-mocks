@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { MockConfigModel, NgxCrudMocksService } from 'ngx-crud-mocks';
+import { NgxCrudMocksService, CrudService } from 'ngx-crud-mocks';
 import { mockFormat } from './exampleMock';
+import { AppService } from './app.service';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers:[{provide: CrudService, useClass: NgxCrudMocksService, useValue: {apiKeyMockaroo: '4174a400', crudMockFormat: mockFormat}}]
-  //providers:[NgxCrudMocksService]
+  providers:[{provide: CrudService, useClass: NgxCrudMocksService}]
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  title = 'Ngx Mocks';
   items: any;
-  constructor(private service: NgxCrudMocksService){
-    this.service.setConfig({key: '4174a400', crudMockFormat: mockFormat});
+  constructor(private service: CrudService){
+    this.service.setConfig({key: 'yourKey', crudMockFormat: mockFormat});
   }
 
   ngOnInit(){
@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
   }
 
   getItems(){
-    this.service.search(0,10).subscribe(data => {
+    this.service.search(0,20).subscribe(data => {
+      console.log(`Data => ${data}`);
       this.items = data;
-      console.log(this.items);
     });
   }
 

@@ -2,18 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { MockConfigModel } from './ngx-crud-mocks.model';
+import { CrudService } from './ngx-crud-mocks-api.service';
 
 @Injectable()
-export class NgxCrudMocksService {
+export class NgxCrudMocksService extends CrudService {
 
   private headers: HttpHeaders;
   private readonly apiMockaroo = 'https://api.mockaroo.com/api/generate.json'; 
-  private readonly localkey = 'items';
-  private apiKeyMockaroo : string;
-  private crudMockFormat : any; 
+  private readonly localkey = 'items'; 
 
   constructor(private http: HttpClient) {
+    super();
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept': 'application/json, text/plain' });
   }
   
@@ -41,7 +40,9 @@ export class NgxCrudMocksService {
       params = params.append('count', '50');
       params = params.append('fields', JSON.stringify(this.crudMockFormat));
       return this.http.get<any[]>(this.apiMockaroo, { params: params }).pipe( 
-        map( data => this.saveListInLocalStorage(data) )
+        map( data => {this.saveListInLocalStorage(data);
+            return data.slice(start, start+limit);
+        })
       );
 
     } else {
@@ -103,9 +104,6 @@ export class NgxCrudMocksService {
     this.saveListInLocalStorage(list);
   }
 
-  public setConfig(config : MockConfigModel){
-    this.apiKeyMockaroo = config.key;
-    this.crudMockFormat = config.crudMockFormat;
-  }
+
 
 }
