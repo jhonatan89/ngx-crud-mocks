@@ -1,11 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable, InjectionToken } from "@angular/core";
 import { Observable } from "rxjs";
-import { MockConfigModel } from "./ngx-crud-mocks.model";
 
+export const API_MOCKAROO = new InjectionToken<string>('API_MOCKAROO');
 
 @Injectable()
 export abstract class CrudService{
-    apiKeyMockaroo:string;
     crudMockFormat:any;
 
     public abstract save(model:any);
@@ -14,9 +13,8 @@ export abstract class CrudService{
     public abstract deleteById(id:number);
     public abstract getNumTotal();
 
-    public setConfig(config : MockConfigModel){
-        this.apiKeyMockaroo = config.key;
-        this.crudMockFormat = config.crudMockFormat;
+    public setCrudMockFormat(crudMockFormat : any){
+        this.crudMockFormat = crudMockFormat;
     }
 
 }

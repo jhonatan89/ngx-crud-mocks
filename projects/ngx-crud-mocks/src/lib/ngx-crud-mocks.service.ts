@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { CrudService } from './ngx-crud-mocks-api.service';
+import { CrudService, API_MOCKAROO } from './ngx-crud-mocks-api.service';
 
 @Injectable()
 export class NgxCrudMocksService extends CrudService {
@@ -11,7 +11,7 @@ export class NgxCrudMocksService extends CrudService {
   private readonly apiMockaroo = 'https://api.mockaroo.com/api/generate.json'; 
   private readonly localkey = 'items'; 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, @Inject(API_MOCKAROO) private apiKeyMockaroo) {
     super();
     this.headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept': 'application/json, text/plain' });
   }

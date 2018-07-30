@@ -7,9 +7,9 @@ This library generates fake information for a crud model schema. Fake informatio
 
 Use [npm](https://www.npmjs.com/search?q=ng2-typeahead) package manager and execute following command:
 
-`npm install ngx-crud-mocks --devSave`
+`npm install ngx-crud-mocks --save-dev`
 
-First, import *ngx-crud-mocks* module in your main module.
+First, import *ngx-crud-mocks* module in your main module. You must configure mockaroo api key in forRoot method.The forRoot static method is a convention that provides and configures services at the same time, in this case apiMockaroo value will be injected inside library. If you use a SharedModule that you import in multiple other feature modules, you can export the NgxCrudMocksModule to make sure you don't have to import it in every module.
 
 ```typescript
 @NgModule({
@@ -18,11 +18,15 @@ First, import *ngx-crud-mocks* module in your main module.
   ],
   imports: [
     ...
-    NgxCrudMocksModule,
+    NgxCrudMocksModule.forRoot({
+      apiMockaroo: 'yourMockarooApiKey' //You must register in mockaroo and get it Api Key.
+    })
     ...
   ],
-  bootstrap: [AppComponent]
+  exports: [NgxCrudMocksModule]
+ 
 })
+export class SharedModule { }
 ```
 
 Then, in your component configure a provider like this example:
@@ -43,16 +47,16 @@ export class AppComponent implements OnInit {
 ```
 
 **CrudService** is an abstract injectable with the most common crud methods.
-* save (Can create and update)
-* search
-* getById
-* deleteById
-* getNumTotal
+* save(model: any) - (Can create and update. If model has an id field this method update information)
+* search(start: number, limit: number, searchParams?: any)
+* getById(id: number)
+* deleteById(id: number)
+* getNumTotal(searchParams?: any)
 
 If you have a same structure in your real service (Real means when a service consuming API REST) you can connect and disconnect changing *useClass* value between **yourRealservice or NgxCrudMocksService**.
 
 
-Next, you must configure mockaroo api key and mockFormat using setConfig method in the constructor.
+Next, you must configure mockFormat using setCrudMockFormat method in the component's constructor.
 
 
 
@@ -69,7 +73,7 @@ import { mockFormat } from './exampleMock';
 })
 export class AppComponent implements OnInit {
   constructor(private service: CrudService){
-    this.service.setConfig({key: 'yourKey', crudMockFormat: mockFormat});
+    this.service.setCrudMockFormat(crudMockFormat: mockFormat);
   }
 
 }  
@@ -104,7 +108,7 @@ export let mockFormat = [
  
 	{
 			name: 'name',
-			type: 'Movie Title',
+			type: 'Movie Title',// Simulate book names :)
 	},
  
 	{

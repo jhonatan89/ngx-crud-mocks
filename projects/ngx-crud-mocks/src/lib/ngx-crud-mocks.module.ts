@@ -1,5 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule,ModuleWithProviders, Provider } from '@angular/core';
 import { NgxCrudMocksComponent } from './ngx-crud-mocks.component';
+import { API_MOCKAROO } from './ngx-crud-mocks-api.service';
+
+export interface NgxCrudMockModuleConfig {
+  apiMockaroo: string;
+}
+
 
 @NgModule({
   imports: [
@@ -7,4 +13,19 @@ import { NgxCrudMocksComponent } from './ngx-crud-mocks.component';
   declarations: [NgxCrudMocksComponent],
   exports: [NgxCrudMocksComponent]
 })
-export class NgxCrudMocksModule { }
+export class NgxCrudMocksModule { 
+
+  static forRoot(config: NgxCrudMockModuleConfig): ModuleWithProviders {
+    return {
+      ngModule: NgxCrudMocksModule,
+      providers: [
+        {provide:API_MOCKAROO, useValue: config.apiMockaroo}
+      ]
+    }
+  }
+
+
+
+
+
+}

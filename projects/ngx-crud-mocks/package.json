@@ -1,6 +1,23 @@
 {
   "name": "ngx-crud-mocks",
-  "version": "0.1.1",
+  "version": "0.1.2",
+  "description": "Crud Mocks Library for Angular using Mockaroo API",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhonatan89/lib-mocks-temp"
+  },
+  "keywords": [
+    "angular",
+    "mockaroo",
+    "mock",
+    "crud",
+    "Web development"
+  ],
+  "author": "Jhonatan Alarcon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhonatan89/lib-mocks-temp/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^5.0.0 || ^6.0.0",
     "@angular/core": "^5.0.0 || ^6.0.0"

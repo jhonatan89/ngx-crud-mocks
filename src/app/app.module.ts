@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NgxCrudMocksModule} from 'ngx-crud-mocks';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgxCrudMocksModule
+    NgxCrudMocksModule.forRoot({
+      apiMockaroo: environment.apiMockaroo
+    })
   ],
   bootstrap: [AppComponent]
 })
