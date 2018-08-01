@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiMockaroo: '4174a400'
+  apiMockaroo: 'xxxx'
 };
 
 
