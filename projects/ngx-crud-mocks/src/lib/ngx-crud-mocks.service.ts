@@ -9,7 +9,7 @@ export class NgxCrudMocksService extends CrudService {
 
   private headers: HttpHeaders;
   private readonly apiMockaroo = 'https://api.mockaroo.com/api/generate.json'; 
-  private readonly localkey = 'items'; 
+  private readonly localStorageDefaultkey = 'items'; 
 
   constructor(private http: HttpClient, @Inject(API_MOCKAROO) private apiKeyMockaroo) {
     super();
@@ -67,7 +67,7 @@ export class NgxCrudMocksService extends CrudService {
 
 
   getListFromLocalStorage(): any[] {
-    return localStorage.getItem(this.localkey) ? JSON.parse(localStorage.getItem(this.localkey)): undefined;
+    return localStorage.getItem(this.localStorageKeyName ? this.localStorageKeyName :this.localStorageDefaultkey) ? JSON.parse(localStorage.getItem(this.localStorageKeyName ? this.localStorageKeyName :this.localStorageDefaultkey)): undefined;
   }
 
   private getItemFromList(id: number): any {
@@ -92,7 +92,7 @@ export class NgxCrudMocksService extends CrudService {
 
   private saveListInLocalStorage(list: any[]) {
     let body = JSON.stringify(list);
-    localStorage.setItem(this.localkey, body);
+    localStorage.setItem(this.localStorageKeyName ? this.localStorageKeyName :this.localStorageDefaultkey, body);
   }
 
   private updateItemToListInLocalStorage(model: any) {

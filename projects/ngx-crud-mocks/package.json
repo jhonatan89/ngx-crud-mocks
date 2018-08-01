@@ -1,6 +1,6 @@
 {
   "name": "ngx-crud-mocks",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Crud Mocks Library for Angular using Mockaroo API",
   "repository": {
     "type": "git",

@@ -7,7 +7,8 @@ export let mockFormat = [
 			name: 'id',
 			type: 'Number',
 			min: 1,
-			max: 1000
+			max: 1000,
+			decimals: 0,
 	},
  
 	{

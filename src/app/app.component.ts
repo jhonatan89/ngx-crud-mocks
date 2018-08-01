@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'Ngx Mocks';
   items: any;
   constructor(private service: CrudService){
-    this.service.setCrudMockFormat(mockFormat);
+    this.service.setConfigMock(mockFormat, 'test');
   }
 
   ngOnInit(){

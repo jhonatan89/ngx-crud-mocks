@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
 
 **CrudService** is an abstract injectable with the most common crud methods.
 * save(model: any) - (Can create and update. If model has an id field this method update information)
-* search(start: number, limit: number, searchParams?: any)
+* search(start?: number, limit?: number, searchParams?: any)
 * getById(id: number)
 * deleteById(id: number)
 * getNumTotal(searchParams?: any)
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
 If you have a same structure in your real service (Real means when a service consuming API REST) you can connect and disconnect changing *useClass* value between **yourRealservice or NgxCrudMocksService**.
 
 
-Next, you must configure mockFormat using setCrudMockFormat method in the component's constructor.
+Next, you must configure *mockFormat* and *localstorage keyName* using setConfigMock method in the component's constructor. Only mockFormat is **mandatory**, localstorage keyName is **optional**.
 
 
 
@@ -73,7 +73,7 @@ import { mockFormat } from './exampleMock';
 })
 export class AppComponent implements OnInit {
   constructor(private service: CrudService){
-    this.service.setCrudMockFormat(crudMockFormat: mockFormat);
+    this.service.setConfigMock(mockFormat, "yourLocalStorageKeyName");
   }
 
 }  
@@ -103,7 +103,8 @@ export let mockFormat = [
 			name: 'id',
 			type: 'Number',
 			min: 1,
-			max: 1000
+      max: 1000,
+      decimals: 0,
 	},
  
 	{
@@ -115,8 +116,8 @@ export let mockFormat = [
 			name: 'price',
 			type: 'Money',
 			min:	1000,
-            max:	200000,
-            symbol:	'$'
+      max:	200000,
+      symbol:	'$'
 	},
 
 	{
