@@ -1,4 +1,5 @@
 # NgxMocks
+[![Quality Gate Status](http://172.17.136.74:9000/api/project_badges/measure?project=co.edu.uniandes.monitorias%3Abuild-all-monitorias&metric=alert_status)](http://172.17.136.74:9000/dashboard?id=co.edu.uniandes.monitorias%3Abuild-all-monitorias)
 
 This library generates fake information for a crud model schema. Fake information is gotten from [Mockaroo Api](https://www.mockaroo.com/api/docs) and it's saved in the browser's localStorage like a objects list. **NgxMocks** allows pushing, editting and deleting objects from list.
 
